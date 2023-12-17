@@ -30,7 +30,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'embed_video',
     'debug_toolbar',
+    'rest_framework',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 
 
 

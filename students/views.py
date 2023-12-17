@@ -1,7 +1,4 @@
-from django.db import models
 from django.views.generic.detail import DetailView
-from typing import Any
-from django.db.models.query import QuerySet
 from courses.models import Course
 from django.views.generic.list import ListView
 from django.urls import reverse_lazy
