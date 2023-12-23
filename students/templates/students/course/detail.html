@@ -1,25 +1,16 @@
-{% load cache %} {% extends "base.html" %} {% block title %} {{ object.title }} {% endblock %} {% block content %}
-<h1>
-    {{ module.title }}
-</h1>
-<div class="contents">
-    <h3>Modules</h3>
-    <ul id="modules">
-        {% for m in object.modules.all %}
-        <li data-id="{{ m.id }}" {% if module %}class="selected" {% endif %}>
-            <a href="{% url 'student_course_detail_module' object.id m.id %}">
-                <span>Module <span class="order">{{ m.order|add:1 }}</span></span>
-                <br> {{ m.title }}
-            </a>
-        </li>
-        {% empty %}
-        <li>No modules yet.</li>
-        {% endfor %}
-    </ul>
-</div>
+{% extends "base.html" %} {% block title %}My courses{% endblock %} {% block content %}
+<h1>My courses</h1>
 <div class="module">
-    {% cache 600 module_contents module %} {% for content in module.contents.all %} {% with item=content.item %}
-    <h2>{{ item.title }}</h2>
-    {{ item.render }} {% endwith %} {% endfor %} {% endcache %}
+    {% for course in object_list %}
+    <div class="course-info">
+        <h3>{{ course.title }}</h3>
+        <p><a href="{% url 'student_course_detail' course.id %}">Access contents</a></p>
+    </div>
+    {% empty %}
+    <p>
+        You are not enrolled in any courses yet.
+        <a href="{% url 'course_list' %}">Browse courses</a> to enroll on a course.
+    </p>
+    {% endfor %}
 </div>
 {% endblock %}
